@@ -1,19 +1,25 @@
 package com.raghib.selenium;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import java.time.Duration;
 
-public class DeleteCookies {
+import org.openqa.selenium.WebDriver;
+
+public class DeleteCookies extends BaseClass {
+
+	public static WebDriver driver;
+	public static String browserName = "chrome";
+	public static String browserVersion = "116";
+	
+	public static String url = "http://google.com";
+	
 	public static void main(String[] args) {
-		// Set the driver path
-		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\Driver\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
+		// Chrome Browser
+		driver = BaseClass.getDriver(browserName, browserVersion);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		// driver.manage().deleteCookieNamed("sessionKey");
-		// click on any link
-		// login page- verify login url
-		driver.get("http://google.com");
-		driver.quit();
+		driver.get(url);
+		BaseClass.quitDriver();
 	}
 }
